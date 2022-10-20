@@ -138,26 +138,6 @@ class Avatar<P: Props> extends PureComponent<P, State> {
         this._onAvatarLoadError = this._onAvatarLoadError.bind(this);
     }
 
-    // /**
-    //  * Implements {@code PureComponent.getDerivedStateFromProps}.
-    //  *
-    //  * @inheritdoc
-    //  */
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     // eslint-disable-next-line max-len
-    //     console.log('[tinkerday] getDerivedStateFromProps', nextProps._participantId, prevState._participantId, nextProps, prevState);
-
-    //     if (nextProps._participantId !== prevState._participantId) {
-
-    //         return {
-    //             ...prevState,
-    //             _audioTrack: nextProps._audioTrack
-    //         };
-    //     }
-
-    //     return null;
-    // }
-
     /**
      * Implements {@code Component#componentDidUpdate}.
      *

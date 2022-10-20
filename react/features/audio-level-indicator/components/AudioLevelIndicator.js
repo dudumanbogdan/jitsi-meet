@@ -74,8 +74,6 @@ class AudioLevelIndicator extends Component<Props> {
             );
         }
 
-        // console.log('[tinkerday] - audioLevelDots', audioLevelDots.map(i => i.props.style.opacity));
-
         return (
             <span className = 'audioindicator in-react'>
                 { audioLevelDots }

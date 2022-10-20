@@ -853,6 +853,7 @@ class Thumbnail extends Component<Props, State> {
             <div
                 className = 'avatar-container'
                 style = { styles }>
+                {/* TODO - move logic from AnimatedAvatar to Avatar  */}
                 {/* <Avatar
                     className = 'userAvatar'
                     participantId = { id } /> */}
