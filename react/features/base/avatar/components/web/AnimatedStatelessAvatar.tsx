@@ -169,7 +169,7 @@ class AnimatedStatelessAvatar extends AbstractStatelessAvatar<Props> {
             duration: 600
         });
         this._glasses = anime({
-            targets: '.${this.props._participantId} #${this.props.avatarSettings?.accessoriesType} path',
+            targets: `.${this.props._participantId} #${this.props.avatarSettings?.accessoriesType} path`,
             easing: 'easeInOutSine',
             direction: 'alternate',
             duration: 5000,
