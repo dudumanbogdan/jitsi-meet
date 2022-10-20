@@ -130,6 +130,7 @@ const styles = () => {
  */
 class AnimatedStatelessAvatar extends AbstractStatelessAvatar<Props> {
     private _mouthTest;
+    private _glasses;
 
     /**
      * Instantiates a new {@code Component}.
@@ -167,9 +168,26 @@ class AnimatedStatelessAvatar extends AbstractStatelessAvatar<Props> {
             easing: 'easeInOutSine',
             duration: 600
         });
+        this._glasses = anime({
+            targets: '.${this.props._participantId} #${this.props.avatarSettings?.accessoriesType} path',
+            easing: 'easeInOutSine',
+            direction: 'alternate',
+            duration: 5000,
+
+            // loop: true,
+            keyframes: [
+
+                // {rotateZ: 5},
+                { translateY: 3 },
+                { translateX: 6 },
+                { translateY: -3 },
+                { translateX: -6 }
+            ]
+        });
 
         if (level > 0.015) {
             this._mouthTest.play();
+            this._glasses.play();
 
             console.log('[tinkerday] level > 0.015, animations started');
         } else {
@@ -181,6 +199,18 @@ class AnimatedStatelessAvatar extends AbstractStatelessAvatar<Props> {
     componentDidMount(): void {
         //
     }
+
+    // eslint-disable-next-line require-jsdoc
+    // componentDidUpdate(prevProps): void {
+    //     console.log('[tinkerday] componentDidUpdate', prevProps._participantId, this.props._participantId);
+    //     if (prevProps._participantId !== this.props._participantId) {
+    //         if (this.props.audioTrack) {
+    //             const { jitsiTrack } = this.props.audioTrack;
+
+    //             jitsiTrack?.on(JitsiTrackEvents.TRACK_AUDIO_LEVEL_CHANGED, this._updateLevel);
+    //         }
+    //     }
+    // }
 
     // eslint-disable-next-line require-jsdoc
     componentWillUnmount() {
@@ -265,7 +295,7 @@ class AnimatedStatelessAvatar extends AbstractStatelessAvatar<Props> {
 
                     <div id = { this.props._participantId } >
                         <Avatar
-                            accessoriesType = 'Prescription02'
+                            accessoriesType = { this.props.avatarSettings?.accessoriesType }
                             avatarStyle = 'Circle'
                             clotheColor = 'PastelBlue'
                             clotheType = 'Hoodie'
