@@ -2,12 +2,13 @@ import { withStyles } from '@mui/styles';
 import anime from 'animejs';
 import Avatar from 'avataaars';
 import clsx from 'clsx';
-import React from 'react';
+import React, {Component} from 'react';
 
 import Icon from '../../../icons/components/Icon';
 import { JitsiTrackEvents } from '../../../lib-jitsi-meet';
 import AbstractStatelessAvatar, { type Props as AbstractProps } from '../AbstractStatelessAvatar';
 import { PRESENCE_AVAILABLE_COLOR, PRESENCE_AWAY_COLOR, PRESENCE_BUSY_COLOR, PRESENCE_IDLE_COLOR } from '../styles';
+import {State} from "../../../../filmstrip/components/web/Thumbnail";
 
 // @ts-ignore
 window.anime = anime;
@@ -18,6 +19,8 @@ type Props = AbstractProps & {
     _participantId: any;
 
     audioTrack: any;
+
+    _audioTrack: any;
 
     avatarSettings: any;
 
@@ -128,7 +131,7 @@ const styles = () => {
  * Implements a stateless avatar component that renders an avatar purely from what gets passed through
  * props.
  */
-class AnimatedStatelessAvatar extends AbstractStatelessAvatar<Props> {
+class AnimatedStatelessAvatar extends Component<Props, State> {
     private _mouthTest;
     private _glasses;
 
@@ -155,6 +158,7 @@ class AnimatedStatelessAvatar extends AbstractStatelessAvatar<Props> {
     // eslint-disable-next-line require-jsdoc
     _updateLevel(level): void {
         console.log('[tinkerday] level changed', level);
+        console.log(`.${this.props._participantId} #Mouth\\/Smile path`)
         this._mouthTest = anime({
             targets: `.${this.props._participantId} #Mouth\\/Smile path`,
             d: [ 'M 43 15 C 43 15 43 17 54 16 C 65 17 64 15 65 15 Z',
@@ -168,28 +172,28 @@ class AnimatedStatelessAvatar extends AbstractStatelessAvatar<Props> {
             easing: 'easeInOutSine',
             duration: 600
         });
-        
+
         console.log(`#${this.props._participantId} #${this.props.avatarSettings?.accessoriesType} path`)
-        this._glasses = anime({
-            targets: `#${this.props._participantId} #${this.props.avatarSettings?.accessoriesType} path`,
-            easing: 'easeInOutSine',
-            direction: 'alternate',
-            duration: 5000,
-
-            // loop: true,
-            keyframes: [
-
-                // {rotateZ: 5},
-                { translateY: 3 },
-                { translateX: 6 },
-                { translateY: -3 },
-                { translateX: -6 }
-            ]
-        });
+        // this._glasses = anime({
+        //     targets: `#${this.props._participantId} #${this.props.avatarSettings?.accessoriesType} path`,
+        //     easing: 'easeInOutSine',
+        //     direction: 'alternate',
+        //     duration: 5000,
+        //
+        //     // loop: true,
+        //     keyframes: [
+        //
+        //         // {rotateZ: 5},
+        //         { translateY: 3 },
+        //         { translateX: 6 },
+        //         { translateY: -3 },
+        //         { translateX: -6 }
+        //     ]
+        // });
 
         if (level > 0.015) {
             this._mouthTest.play();
-            this._glasses.play();
+            // this._glasses.play();
 
             console.log('[tinkerday] level > 0.015, animations started');
         } else {
@@ -238,19 +242,19 @@ class AnimatedStatelessAvatar extends AbstractStatelessAvatar<Props> {
         // TODO - to be removed
         const initials = 'TEST' || this.props.initials;
 
-        if (this._isIcon(url)) {
-            return (
-                <div
-                    className = { clsx(this._getAvatarClassName(), this._getBadgeClassName()) }
-                    data-testid = { this.props.testId }
-                    id = { this.props.id }
-                    style = { this._getAvatarStyle(this.props.color) }>
-                    <Icon
-                        size = '50%'
-                        src = { url } />
-                </div>
-            );
-        }
+        // if (this._isIcon(url)) {
+        //     return (
+        //         <div
+        //             className = { clsx(this._getAvatarClassName(), this._getBadgeClassName()) }
+        //             data-testid = { this.props.testId }
+        //             id = { this.props.id }
+        //             style = { this._getAvatarStyle(this.props.color) }>
+        //             <Icon
+        //                 size = '50%'
+        //                 src = { url } />
+        //         </div>
+        //     );
+        // }
 
         if (url) {
             return (
