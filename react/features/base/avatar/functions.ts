@@ -15,6 +15,11 @@ const AVATAR_COLORS = [
 const wordSplitRegex = (/\s+|\.+|_+|;+|-+|,+|\|+|\/+|\\+|"+|'+|\(+|\)+|#+|&+/);
 const splitter = new GraphemeSplitter();
 
+export const AVATAR_SETTINGS = {
+    // eslint-disable-next-line max-len
+    top: [ 'NoHair', 'Eyepatch', 'Hat', 'Hijab', 'Turban', 'WinterHat1', 'WinterHat2', 'WinterHat3', 'WinterHat4', 'LongHairBigHair', 'LongHairBob', 'LongHairBun', 'LongHairCurly', 'LongHairCurvy', 'LongHairDreads', 'LongHairFrida', 'LongHairFro', 'LongHairFroBand', 'LongHairNotTooLong', 'LongHairShavedSides', 'LongHairMiaWallace', 'LongHairStraight', 'LongHairStraight2', 'LongHairStraightStrand', 'ShortHairDreads01', 'ShortHairDreads02', 'ShortHairFrizzle', 'ShortHairShaggyMullet', 'ShortHairShortCurly', 'ShortHairShortFlat', 'ShortHairShortRound', 'ShortHairShortWaved', 'ShortHairSides', 'ShortHairTheCaesar', 'ShortHairTheCaesarSidePart' ]
+};
+
 /**
  * Generates the background color of an initials based avatar.
  *
@@ -39,6 +44,30 @@ export function getAvatarColor(initials: string | undefined, customAvatarBackgro
     }
 
     return colorsBase[colorIndex];
+}
+
+
+/**
+ * Generates the same setting name based on initials of the participant.
+ *
+ * @param {string?} initials - The initials of the avatar.
+ * @param {Array<string>} settings - Custom avatar setting array.
+ * @returns {string}
+ */
+export function getAvatarSettingName(initials: string, settings: []) {
+    let index = 0;
+
+    if (initials) {
+        let nameHash = 0;
+
+        for (const s of initials) {
+            nameHash += Number(s.codePointAt(0));
+        }
+
+        index = nameHash % settings.length;
+    }
+
+    return settings[index];
 }
 
 /**

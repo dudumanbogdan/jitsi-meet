@@ -8,7 +8,7 @@ import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 
 import { createScreenSharingIssueEvent, sendAnalytics } from '../../../react/features/analytics';
-import { Avatar } from '../../../react/features/base/avatar';
+import { AnimatedAvatar, Avatar } from '../../../react/features/base/avatar';
 import theme from '../../../react/features/base/components/themes/participantsPaneTheme.json';
 import {
     getMultipleVideoSupportFeatureFlag,
@@ -534,7 +534,11 @@ export default class LargeVideoManager {
     updateAvatar() {
         ReactDOM.render(
             <Provider store = { APP.store }>
-                <Avatar
+                {/* <Avatar
+                    id = "dominantSpeakerAvatar"
+                    participantId = { this.id }
+                    size = { 200 } /> */}
+                <AnimatedAvatar
                     id = "dominantSpeakerAvatar"
                     participantId = { this.id }
                     size = { 200 } />

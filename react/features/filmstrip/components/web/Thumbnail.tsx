@@ -10,7 +10,7 @@ import { createScreenSharingIssueEvent } from '../../../analytics/AnalyticsEvent
 import { sendAnalytics } from '../../../analytics/functions';
 import { IState } from '../../../app/types';
 // @ts-ignore
-import { Avatar } from '../../../base/avatar';
+import { AnimatedAvatar, Avatar } from '../../../base/avatar';
 import {
     getMultipleVideoSupportFeatureFlag,
     getSourceNameSignalingFeatureFlag
@@ -853,7 +853,10 @@ class Thumbnail extends Component<Props, State> {
             <div
                 className = 'avatar-container'
                 style = { styles }>
-                <Avatar
+                {/* <Avatar
+                    className = 'userAvatar'
+                    participantId = { id } /> */}
+                <AnimatedAvatar
                     className = 'userAvatar'
                     participantId = { id } />
             </div>
